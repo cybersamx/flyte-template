@@ -1,31 +1,13 @@
-import math
 import unittest
-from dataclasses import dataclass
 
-from cybersamx_main.stats import mean
-
-
-@dataclass
-class StatsTestCase:
-    m: list[float]
-    expect: float
-
-
-def compare(a: float, b: float) -> bool:
-    epsilon = 0.00001
-    return math.fabs(a - b) < epsilon
+import project.core.data as data
 
 
 class TestStats(unittest.TestCase):
-    def test_mean(self):
-        tcs = [
-            StatsTestCase([1, 2, 3, 4], 2.5),
-            StatsTestCase([610, 450, 160, 420, 310], 390),
-        ]
-
-        for tc in tcs:
-            result = mean(tc.m)
-            self.assertTrue(compare(result, tc.expect))
+    def test_load_wine(self):
+        df = data.get_data()
+        self.assertEqual(178, len(df.index))
+        self.assertEqual(14, len(df.columns))
 
 
 if __name__ == '__main__':

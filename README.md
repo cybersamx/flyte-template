@@ -1,53 +1,60 @@
-# Python Main Program Template
+# Flyte Project Template
 
-A python template that we can use to create a new project for the development of python main program.
+This project serves as a starter template for any [Flyte](https://flyte.org) project.
 
 ## Setup
 
-### Set up the Project
+Instructions for setting up the project and tools (including `flyte`) needed to compile and run the project. 
 
-1. Set up tools, packages, and virtual environment. It installs the tools/packages for the dev environment and the packages for running the package.
+### Set up Local Flyte
+
+1. Optionally use `pyenv` to manage different versions of python on your machine.
+
+   ```shell
+   brew install pyenv
+   # Follow the post-install instructions for pyenv
+   pyenv install --list   # List of available python versions to install
+   pyenv install 3.11.9
+   pyenv global 3.11.9
+   ```
+
+1. Go to the root directory of this flyte project and create a virtual environment.
+
+   ```shell
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+
+1. Install `make`.
+
+   ```shell
+   brew install make
+   ```
+
+1. Install the tools and packages.
 
    ```shell
    make install
    ```
-
-1. The Makefile doesn't activate the virtual environment (virtualenv), just set up the virtualenv. So activate the virtualenv after running `make`.
-
-   ```shell
-   source .venv/bin/activate 
-   ```
-
-### Set up IDE
-
-#### PyCharm
-
-If you open this project in PyCharm, perform the following setup on the IDE to optimize the user experience.
-
-1. Go to **Settings** and tweak the following
-   * **Project Structure**. Mark the directories `src` and `tests` as `Sources` and `Tests` respectively. This drastically improves code completion by parsing the project code for the code completion.
-   * **Python Interpreter**. Make sure we set the interpreter to the one on the project virtual environment. Remove the current interpreter if needed. Select **local interpreter... > Virtualenv > Existing**.
-
-### Running Tests
    
-1. Run the command to test
+### Run Flyte Workflow Locally
 
-   ```shell
-   $ make test
-   $ # Alternatively, run pytest directly.
-   $ python -m pytest tests
-   ```
-
-### Run Program
-
-1. Run the command to run the project.
+1. Run the workflow locally.
 
    ```shell
    make run
-   # Alternatively via file arg
-   python src/cybersamx_main/__main__.py
-   # Alternatively via module arg
-   cd src
-   python -m cybersamx_main
-   cd -
    ```
+
+### Run Tests
+
+1. Run the unit tests.
+
+   ```shell
+   make test
+   ```
+
+### Future Work
+
+* Consider using `poetry` instead of `make`.
+* Right now, the tools needed by this project are installed in the virtual environment. Consider installing to the user directory.
+* Separate the installation of packages from the installation of tools.

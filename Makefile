@@ -1,6 +1,7 @@
 ROOT_DIR := $(shell git rev-parse --show-toplevel)
 VENV := $(ROOT_DIR)/.venv
 PYTHON := $(VENV)/bin/python3
+FLYTE := $(VENV)/bin/pyflyte
 TWINE := $(VENV)/bin/twine
 PIP := $(VENV)/bin/pip
 VIRTUAL_ENV := python3 -m venv
@@ -48,13 +49,11 @@ publish: clean test
 	$(TWINE) check dist/*
 	$(TWINE) upload -r testpypi dist/*
 
-##@ run: Run the program
+##@ run: Run the flyte workflow
 
 run: venv lint
-	@echo "Run the python project."
-	@cd src && \
-	$(PYTHON) -m cybersamx_main && \
-	cd -
+	@echo "Run the flyte workflow."
+	$(FLYTE) run src/project/workflows/wine_classifier.py classifier_wf
 
 ##@ lint: Run a linter against the project
 
